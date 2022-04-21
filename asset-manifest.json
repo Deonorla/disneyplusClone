@@ -1,16 +1,17 @@
 {
   "files": {
-    "main.css": "/disneyplusClone/static/css/main.073c9b0a.css",
-    "main.js": "/disneyplusClone/static/js/main.014b6ea6.js",
-    "static/js/787.5c7b169c.chunk.js": "/disneyplusClone/static/js/787.5c7b169c.chunk.js",
-    "static/media/logo.svg": "/disneyplusClone/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "main.css": "/disneyplusClone/static/css/main.ed3cf92f.css",
+    "main.js": "/disneyplusClone/static/js/main.01e573de.js",
+    "static/media/login-background.jpg": "/disneyplusClone/static/media/login-background.05b1a1b3088cbb458939.jpg",
+    "static/media/cta-logo-two.png": "/disneyplusClone/static/media/cta-logo-two.e69ae55254630c715843.png",
+    "static/media/cta-logo-one.svg": "/disneyplusClone/static/media/cta-logo-one.1e2a5ccbbcbea0879d03e030e1e295ff.svg",
+    "static/media/logo.svg": "/disneyplusClone/static/media/logo.8205aae82a3c67ca943e8628e2183b0d.svg",
     "index.html": "/disneyplusClone/index.html",
-    "main.073c9b0a.css.map": "/disneyplusClone/static/css/main.073c9b0a.css.map",
-    "main.014b6ea6.js.map": "/disneyplusClone/static/js/main.014b6ea6.js.map",
-    "787.5c7b169c.chunk.js.map": "/disneyplusClone/static/js/787.5c7b169c.chunk.js.map"
+    "main.ed3cf92f.css.map": "/disneyplusClone/static/css/main.ed3cf92f.css.map",
+    "main.01e573de.js.map": "/disneyplusClone/static/js/main.01e573de.js.map"
   },
   "entrypoints": [
-    "static/css/main.073c9b0a.css",
-    "static/js/main.014b6ea6.js"
+    "static/css/main.ed3cf92f.css",
+    "static/js/main.01e573de.js"
   ]
 }
