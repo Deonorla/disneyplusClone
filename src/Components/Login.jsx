@@ -1,13 +1,21 @@
- import styled from 'styled-components';
+import styled from 'styled-components';
 import img from '../assets/login-background.jpg';
-import img2 from "../assets/cta-logo-one.svg";
+import img1 from "../assets/cta-logo-one.svg";
+import img2 from "../assets/cta-logo-two.png"
 const Login = (props)=>{
     return(
 
        <Container>
            <Content>
                <CTA>
-                   <CtaLogo src={img2}/>
+                   <CtaLogo src={img1}/>
+                   <SignUp>GET IT ALL HERE</SignUp>
+                   <Description>
+                       Get Premier Access to Raya and the Last Dragon 
+                       with Disney+ new subscription. As of 03/04/22, Disney+ 
+                       subscription and Bundle will increase by 1$. 
+                   </Description>
+                   <CtaLogo2 src={img2}/>
                </CTA>
                <BgImage src={img} alt=''/>
            </Content>
@@ -45,7 +53,7 @@ right: 0;
 left: 0;
 height: auto;
 width: auto;
-
+ 
 `;
 
 const CTA = styled.div`
@@ -63,9 +71,44 @@ const CTA = styled.div`
 `;
 
 const CtaLogo =styled.img`
-max-width: 70vw;
+width: 100%;
 display: block;
 margin-bottom: 12px;
 `;
 
+const SignUp = styled.button`
+    outline: none;
+    border:1px solid transparent;
+    background-color: #0063e5; 
+    padding: 1rem 0;
+    width: 100%;
+    font-weight: bolder;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: #F9F9F9;
+    letter-spacing: 1.5px; 
+    border-radius: 4px;
+
+    &:hover {
+        background-color: #0483ee;
+      
+    }
+
+`;
+
+const Description = styled.p`
+    color: hsla(0, 0%, 95.3%, 1);
+    font-size: 11px;
+    margin: 0 0 24px;
+    line-height: 1.5;
+    letter-spacing: 1.5px;
+`; 
+
+const CtaLogo2 = styled.img` 
+    max-width: 600px;
+    margin-bottom: 28px;
+    display: inline-block; 
+    vertical-align: bottom;
+    width:100%;
+`;
 export default Login;
