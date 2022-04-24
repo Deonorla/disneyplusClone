@@ -8,7 +8,8 @@ const Login = (props)=>{
        <Container>
            <Content>
                <CTA>
-                   <CtaLogo src={img1}/>
+                   <CtaLogo src={img1}
+                   />
                    <SignUp>GET IT ALL HERE</SignUp>
                    <Description>
                        Get Premier Access to Raya and the Last Dragon 

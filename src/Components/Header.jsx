@@ -7,7 +7,24 @@ import original from "../assets/original-icon.svg"
 import movie from "../assets/movie-icon.svg"
 import series from "../assets/series-icon.svg"
 import { Link } from 'react-router-dom'
+
+import { authentication } from '../Firebase';
+import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+
  const Header =(props)=>{
+
+    const authHandler =()=>{
+        const provider = new GoogleAuthProvider();
+        signInWithPopup(authentication, provider)
+          .then((result) => {
+           console.log(result);
+         
+          }).catch((error) => {
+           alert(error.message)
+           
+          });
+    }
+
     return(
        <Nav>
            <Logo>
@@ -47,7 +64,7 @@ import { Link } from 'react-router-dom'
                    <span>SERIES</span>
                </Link>
            </NavMenu>
-           <Login>LOGIN</Login>
+           <Login onClick={authHandler}>LOGIN</Login>
            
         </Nav>
     )
@@ -94,9 +111,9 @@ const Logo = styled.a`
     margin-right: auto;
     margin-left: 25px;
 
-    // @media screen and (max-width: 768px){
-    //      display: none;
-    // }
+    @media screen and (max-width: 768px){
+         display: none;
+    }
 
   a{
         display: flex;
