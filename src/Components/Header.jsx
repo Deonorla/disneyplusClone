@@ -17,7 +17,7 @@ import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
         const provider = new GoogleAuthProvider();
         signInWithPopup(authentication, provider)
           .then((result) => {
-           console.log(result);
+           console.log(result); 
          
           }).catch((error) => {
            alert(error.message)
