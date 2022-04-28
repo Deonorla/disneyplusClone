@@ -7,17 +7,28 @@ import original from "../assets/original-icon.svg"
 import movie from "../assets/movie-icon.svg"
 import series from "../assets/series-icon.svg"
 import { Link } from 'react-router-dom'
-
 import { authentication } from '../Firebase';
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { 
+    selectUserName, 
+    selectUserPhoto,
+    setUserLoginDetails,
+ } from '../Features/user/UserSlice';
 
  const Header =(props)=>{
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const userName = useSelector(selectUserName)
+    const userPhoto = useSelector(selectUserPhoto);
 
     const authHandler =()=>{
         const provider = new GoogleAuthProvider();
         signInWithPopup(authentication, provider)
           .then((result) => {
-           console.log(result); 
+           setUser(result.user)
          
           }).catch((error) => {
            alert(error.message)
@@ -25,11 +36,25 @@ import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
           });
     }
 
+    const setUser = (user) =>{
+        dispatch(
+            setUserLoginDetails({
+                name: user.displayName,
+                email: user.email,
+                photo: user.photoURL
+        }))
+    }
+
     return(
        <Nav>
            <Logo>
                <img src ={logo} alt="Disney+"/>
            </Logo>
+
+            { !userName ? (<Login onClick={authHandler}>Login</Login>) : (
+
+            <>
+            
            <NavMenu>
                
                <Link to='/home'>
@@ -64,8 +89,12 @@ import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
                    <span>SERIES</span>
                </Link>
            </NavMenu>
-           <Login onClick={authHandler}>LOGIN</Login>
            
+           <UserImg src={userPhoto} alt='userPhoto'/>
+
+           </>
+          
+        )} 
         </Nav>
     )
 }
@@ -186,6 +215,8 @@ const Logo = styled.a`
     }
  `;
 
-
+const UserImg = styled.img`
+    height: 100%;
+`;
 
 export default Header;
