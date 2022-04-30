@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import logo from "../assets/logo.svg"
+import { useEffect } from 'react';
 import homeIcon from "../assets/home-icon.svg"
 import search from "../assets/search-icon.svg"
 import watchlist from "../assets/watchlist-icon.svg"
@@ -15,7 +16,10 @@ import {
     selectUserName, 
     selectUserPhoto,
     setUserLoginDetails,
+    setSignOutState
  } from '../Features/user/UserSlice';
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
+
 
  const Header =(props)=>{
 
@@ -24,8 +28,21 @@ import {
     const userName = useSelector(selectUserName)
     const userPhoto = useSelector(selectUserPhoto);
 
+// checks if user is loggedin  and navigates back to home
+    useEffect(()=>{
+      
+      onAuthStateChanged(authentication, (user) => {
+          if(user){
+              setUser(user);
+              navigate('/home');
+          }
+      })
+      
+    }, [userName])
+
     const authHandler =()=>{
-        const provider = new GoogleAuthProvider();
+        if(!userName){
+            const provider = new GoogleAuthProvider();
         signInWithPopup(authentication, provider)
           .then((result) => {
            setUser(result.user)
@@ -34,6 +51,16 @@ import {
            alert(error.message)
            
           });
+        } else if (userName) {
+            const auth = getAuth();
+            signOut(auth).then(()=>{
+                dispatch(setSignOutState());
+                navigate('/');
+            }).catch((error) => {
+                alert(error.message);
+            })
+        }
+        
     }
 
     const setUser = (user) =>{
@@ -51,7 +78,7 @@ import {
                <img src ={logo} alt="Disney+"/>
            </Logo>
 
-            { !userName ? (<Login onClick={authHandler}>Login</Login>) : (
+            { !userName ? (<Login onClick={authHandler}>Log</Login>) : (
 
             <>
             
@@ -62,7 +89,7 @@ import {
                    <span>HOME</span>
                </Link>
 
-               <Link to='/search'>
+               <Link to='/search'>gg
                    <img src={search} alt=''/>
                    <span>SEARCH</span>
                </Link>
@@ -89,8 +116,14 @@ import {
                    <span>SERIES</span>
                </Link>
            </NavMenu>
+
+           <SignOut>
+            <UserImg src={userPhoto} alt='userPhoto'/>
+            <DropDown>
+                <span onClick={authHandler}>Sign out</span>
+            </DropDown>
+           </SignOut>
            
-           <UserImg src={userPhoto} alt='userPhoto'/>
 
            </>
           
@@ -217,6 +250,39 @@ const Logo = styled.a`
 
 const UserImg = styled.img`
     height: 100%;
+    border-radius: 50%;
+    width: 100%;
 `;
 
+const DropDown =styled.div`
+    position: absolute;
+    top: 48px;
+    right: 0px;
+    background: rgb(19, 19, 19);
+    border: 1px solid (151, 151, 151, 0.34);
+    border-radius: 4px;
+    box-shadow: rgb(0 0 0 / 50%) 0px 0px 18px 0px;
+    padding: 10px;
+    font-size: 14px;
+    letter-spacing: 3px;
+    width: 100px;
+    opacity: 0;
+`;
+
+const SignOut = styled.div`
+    position: relative;
+    height: 48px;
+    width: 48px;
+    display: flex; 
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+
+    &:hover{
+        ${DropDown} { 
+            opacity: 1;
+            transistion-duration: 1s;
+        }
+    }
+`;
 export default Header;
