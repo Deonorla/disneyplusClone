@@ -18,8 +18,7 @@ import {
     setUserLoginDetails,
     setSignOutState
  } from '../Features/user/UserSlice';
-import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
-
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 
  const Header =(props)=>{
 
@@ -75,10 +74,10 @@ import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
     return(
        <Nav>
            <Logo>
-               <img src ={logo} alt="Disney+"/>
+               <img src={logo} alt="Disney+"/>
            </Logo>
 
-            { !userName ? (<Login onClick={authHandler}>Log</Login>) : (
+            { !userName ? (<Login onClick={authHandler}>Login</Login>) : (
 
             <>
             
@@ -89,7 +88,7 @@ import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
                    <span>HOME</span>
                </Link>
 
-               <Link to='/search'>gg
+               <Link to='/search'>
                    <img src={search} alt=''/>
                    <span>SEARCH</span>
                </Link>
