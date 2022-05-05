@@ -12,10 +12,12 @@ import { setMovies } from '../Features/Movie/MovieSlice';
 import { selectUserName } from '../Features/user/UserSlice';
 import { onSnapshot, collection } from 'firebase/firestore';
 
+
 const Home = (props) =>{
     const dispatch = useDispatch();
     const userName = useSelector(selectUserName);
 
+   
     let recommends = [];
     let newdisney = [];
     let originals = [];
@@ -23,35 +25,35 @@ const Home = (props) =>{
 
     useEffect(()=>{
         onSnapshot(collection(storage,'movies'),(snapshot) => {
+
             snapshot.docs.map((doc) => {
-                console.log(recommends);
-             
+                console.log(recommends)
                 switch(doc.data().type){
                    
                     case 'recommend' :
-                        recommends =[...recommends,{id: doc.id, ...doc.data() }];
+                      recommends.push({id: doc.id, ...doc.data() });
                        break;
     
                    case 'new':
-                      newdisney = [...newdisney, {id: doc.id, ...doc.data()}];
+                    newdisney.push({id: doc.id, ...doc.data() });
                       break;
                    case 'original':
-                           originals = [...originals, {id: doc.id, ...doc.data()}];
+                           originals.push({id: doc.id, ...doc.data() });
                            break;
      
                    case 'trending':
-                        trending= [...trending, {id: doc.id, ...doc.data()}];
+                        trending.push({id: doc.id, ...doc.data() });
                         break;
-                   
+                   default :
+                    alert('error');
                 
     
                    }
              
                
            })
-       
 
-        dispatch(
+           dispatch(
             setMovies({
             recommend: recommends,
             newdisney: newdisney,
@@ -59,7 +61,6 @@ const Home = (props) =>{
             original: originals
         })
         );
-
     })
            
     }, [userName])
