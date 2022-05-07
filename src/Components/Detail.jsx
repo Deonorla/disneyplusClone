@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import icon1 from "../assets/play-icon-black.png";
 import icon2 from "../assets/play-icon-white.png";
+import icon3 from "../assets/group-icon.png";
 
 const Detail =()=> {
     return(
@@ -25,7 +26,17 @@ const Detail =()=> {
                         <span/>
                         <span/>
                     </AddList>
+                    <GroupWatch>
+                        <div>
+                            <img src={icon3} alt="" />
+                        </div>
+                    </GroupWatch>
                 </Control>
+                <SubTitle>
+                    <Description>
+
+                     </Description>   
+                </SubTitle>
            </ContentMeta>
        </Container>
     )
@@ -127,7 +138,7 @@ const Player = styled.button`
 
 const Trailer = styled(Player)`
      background: rgba(0, 0, 0, 0.3);
-     border: 1px solid rgba(249, 249, 249);
+     border: 1px solid rgb(249, 249, 249);
      color: rgb(249, 249, 249);
 `;
 
@@ -142,6 +153,53 @@ const AddList = styled.div`
    border-radius: 50px;
    border: 2px solid white;
    cursor: pointer;
+
+   span {
+       background-color: rgb(249, 249, 249);
+       display: inline-block;
+
+       &:first-child{
+            height: 2px;
+            transform: translate(1px, 0px) rotate(0deg);
+            width: 16px;
+       }
+
+       &:nth-child(2){
+        height: 16px;
+        transform: translateX(-8px) rotate(0deg);
+        width: 2px;
+       }
+   }
+
+`;
+
+const GroupWatch = styled.div`
+   height: 44px;
+   width: 44px;
+   border-radius: 50%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background: white;
+
+   div{
+       height: 40px;
+       width: 40px;
+       background: rgb(0, 0, 0); 
+       border-radius: 50%;
+
+   } 
+
+   img{
+       width: 100%;
+   }
+`;
+
+const SubTitle = styled.div`
+
+`;
+
+const Description = styled.div`
 
 `;
 export default Detail;
