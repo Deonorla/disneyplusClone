@@ -1,32 +1,24 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-
-const NewDisney = () => {
+import { selectNewDisney } from '../Features/Movie/MovieSlice';
+import { useSelector } from 'react-redux';
+const NewDisney = (props) => {
+  const movies = useSelector(selectNewDisney);
     return(
        <Container>
            <h4>New to Disney+</h4>
            <Content>
+            { movies 
+              && movies.map((movie,key)=>(
                 <Wrap>
-                    <Link to='/'>
-                        <img src='https://images2.alphacoders.com/589/thumbbig-589553.webp' alt=''/>
-                    </Link>
+                  <Link to={'/details' + movie.id}>
+                      <img src={movie.cardImg} alt={movie.title}/>
+                  </Link>
                 </Wrap>
-                <Wrap>
-                    <Link to='/'>
-                        <img src='https://images4.alphacoders.com/653/thumbbig-653613.webp' alt=''/>
-                    </Link>
-                </Wrap>
-               
-                <Wrap>
-                    <Link to='/'>
-                        <img src='https://images5.alphacoders.com/677/thumbbig-677723.webp' alt=''/>
-                    </Link>
-                </Wrap>
-                <Wrap>
-                    <Link to='/'>
-                        <img src='https://images5.alphacoders.com/721/thumbbig-721135.webp' alt=''/>
-                    </Link>
-                </Wrap>
+              ))
+
+            } 
+                
            </Content>
            
        </Container>

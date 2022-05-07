@@ -16,7 +16,7 @@ import { onSnapshot, collection } from 'firebase/firestore';
 const Home = (props) =>{
     const dispatch = useDispatch();
     const userName = useSelector(selectUserName);
-
+    
    
     let recommends = [];
     let newdisney = [];
@@ -27,11 +27,13 @@ const Home = (props) =>{
         onSnapshot(collection(storage,'movies'),(snapshot) => {
 
             snapshot.docs.map((doc) => {
-                console.log(recommends)
+                console.log(newdisney)
+
+              
                 switch(doc.data().type){
                    
                     case 'recommend' :
-                      recommends.push({id: doc.id, ...doc.data() });
+                       recommends.push({ id:doc.id, ...doc.data()});
                        break;
     
                    case 'new':
@@ -56,7 +58,7 @@ const Home = (props) =>{
            dispatch(
             setMovies({
             recommend: recommends,
-            newdisney: newdisney,
+            newDisney: newdisney,
             trending: trending,
             original: originals
         })
