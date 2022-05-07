@@ -5,6 +5,7 @@ import NewDisney from './NewDisney';
 import Recommends from './Recommends';
 import Trending from './Trending';
 import Viewers from './Viewers';
+import Originals from './Originals'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { storage } from '../Firebase';
@@ -60,7 +61,7 @@ const Home = (props) =>{
             recommend: recommends,
             newDisney: newdisney,
             trending: trending,
-            original: originals
+            originals: originals
         })
         );
     })
@@ -74,6 +75,7 @@ const Home = (props) =>{
            <Viewers/>
            <Recommends/>
            <NewDisney/>
+           <Originals/>
            <Trending/>
         </Container>
     )
