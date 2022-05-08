@@ -2,15 +2,39 @@ import styled from "styled-components";
 import icon1 from "../assets/play-icon-black.png";
 import icon2 from "../assets/play-icon-white.png";
 import icon3 from "../assets/group-icon.png";
+import { useEffect, useState } from "react";
+import { useParams } from 'react-router-dom';
+import { storage } from "../Firebase"
+import { doc, getDoc } from "firebase/firestore";
+
+
 
 const Detail =()=> {
+    const { id } = useParams();
+    const [detailData, setDetailData] = useState({})
+
+    useEffect(()=>{
+        getDoc(doc(storage, "movies", id)).then( (movieSnap) => {
+            if (movieSnap.exists()) {
+                  setDetailData(movieSnap.data());
+            } else {
+                console.log("No such document!");
+            }
+        }).catch((error) =>{
+            console.log('Error data:', error)
+        })
+        
+       
+    },[id]) 
+
+
     return(
        <Container>
            <Background>
-                <img src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/456A711C19899C881600F6247705E5253EB18C2471D75E5281E1FF6ACB6D2FBA/scale?width=1440&aspectRatio=1.78&format=jpeg" alt="" />
+                <img src={detailData.backgroundImg} alt={detailData.title} />
            </Background>
            <ImgTitle>
-                <img src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/E837DDE901CD036DD87A00F2D63E2F2458FAA798E62BE91F973AECCEA313A67E/scale?width=1440&aspectRatio=1.78" alt="" />
+                <img src={detailData.titleImg} alt={detailData.title} />
            </ImgTitle>
            <ContentMeta>
                 <Control>
@@ -33,10 +57,12 @@ const Detail =()=> {
                     </GroupWatch>
                 </Control>
                 <SubTitle>
-                    <Description>
-
-                     </Description>   
+                     {detailData.subTitle}
                 </SubTitle>
+
+                <Description>
+                {detailData.description}
+              </Description>  
            </ContentMeta>
        </Container>
     )
@@ -196,10 +222,22 @@ const GroupWatch = styled.div`
 `;
 
 const SubTitle = styled.div`
+   color: rgb(249, 249, 249);
+   font-size: 1rem;
+   min-height: 20px;
 
+   @media (max-width: 768px){
+       font-size: 12px;
+   }
 `;
 
 const Description = styled.div`
-
+   line-height: 1.4;
+   padding: 16px 0px;
+   color: rgb(249, 249, 249);
+   font-size: 1.5rem;
+   @media (max-width: 768px){
+       font-size: 14px;
+   }
 `;
 export default Detail;
