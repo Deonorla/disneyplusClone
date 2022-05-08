@@ -1,6 +1,7 @@
 {
-  "homepage":"https://Deonorla.github.io/disneyplusClone",
+ 
   "name": "disneyplusclone",
+  "homepage":"https://Deonorla.github.io/disneyplusClone",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
