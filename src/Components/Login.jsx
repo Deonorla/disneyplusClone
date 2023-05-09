@@ -10,7 +10,7 @@ const Login = (props)=>{
                <CTA>
                    <CtaLogo src={img1}
                    />
-                   <SignUp>GET IT ALL HERE</SignUp>
+                   <SignUp>Click on the Login botton to get started</SignUp>
                    <Description>
                        Get Premier Access to Raya and the Last Dragon 
                        with Disney+ new subscription. As of 03/04/22, Disney+ 
